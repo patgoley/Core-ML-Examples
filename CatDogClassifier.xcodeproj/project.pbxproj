@@ -13,6 +13,10 @@
 		8E124EB4259EF16F00E37BAC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E124EB3259EF16F00E37BAC /* Preview Assets.xcassets */; };
 		8E124EBF259EF17000E37BAC /* CatDogClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E124EBE259EF17000E37BAC /* CatDogClassifierTests.swift */; };
 		8E124ECA259EF17000E37BAC /* CatDogClassifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E124EC9259EF17000E37BAC /* CatDogClassifierUITests.swift */; };
+		8E211FC125C280440037283D /* KaggleCatsDogsClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8E211FC025C280440037283D /* KaggleCatsDogsClassifier.mlmodel */; };
+		8E211FC625C283CE0037283D /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E211FC525C283CE0037283D /* Classifier.swift */; };
+		8E211FCB25C3311B0037283D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E211FCA25C3311B0037283D /* AppDelegate.swift */; };
+		8EE2DBAA25C3CCE600390462 /* CombineExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2DBA925C3CCE600390462 /* CombineExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +49,10 @@
 		8E124EC5259EF17000E37BAC /* CatDogClassifierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatDogClassifierUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E124EC9259EF17000E37BAC /* CatDogClassifierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDogClassifierUITests.swift; sourceTree = "<group>"; };
 		8E124ECB259EF17000E37BAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E211FC025C280440037283D /* KaggleCatsDogsClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = KaggleCatsDogsClassifier.mlmodel; path = turicreate/KaggleCatsDogsClassifier.mlmodel; sourceTree = SOURCE_ROOT; };
+		8E211FC525C283CE0037283D /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
+		8E211FCA25C3311B0037283D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8EE2DBA925C3CCE600390462 /* CombineExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,10 @@
 			children = (
 				8E124EAC259EF16D00E37BAC /* CatDogClassifierApp.swift */,
 				8E124EAE259EF16D00E37BAC /* ContentView.swift */,
+				8E211FC525C283CE0037283D /* Classifier.swift */,
+				8E211FCA25C3311B0037283D /* AppDelegate.swift */,
+				8EE2DBA925C3CCE600390462 /* CombineExtensions.swift */,
+				8E211FC025C280440037283D /* KaggleCatsDogsClassifier.mlmodel */,
 				8E124EB0259EF16F00E37BAC /* Assets.xcassets */,
 				8E124EB5259EF16F00E37BAC /* Info.plist */,
 				8E124EB2259EF16F00E37BAC /* Preview Content */,
@@ -259,7 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E211FC625C283CE0037283D /* Classifier.swift in Sources */,
 				8E124EAF259EF16D00E37BAC /* ContentView.swift in Sources */,
+				8E211FC125C280440037283D /* KaggleCatsDogsClassifier.mlmodel in Sources */,
+				8EE2DBAA25C3CCE600390462 /* CombineExtensions.swift in Sources */,
+				8E211FCB25C3311B0037283D /* AppDelegate.swift in Sources */,
 				8E124EAD259EF16D00E37BAC /* CatDogClassifierApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
