@@ -17,6 +17,10 @@
 		8E211FC625C283CE0037283D /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E211FC525C283CE0037283D /* Classifier.swift */; };
 		8E211FCB25C3311B0037283D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E211FCA25C3311B0037283D /* AppDelegate.swift */; };
 		8EE2DBAA25C3CCE600390462 /* CombineExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2DBA925C3CCE600390462 /* CombineExtensions.swift */; };
+		8EE2DBB725C494FE00390462 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2DBB625C494FE00390462 /* Camera.swift */; };
+		8EE2DBBF25C4965400390462 /* OptionalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2DBBE25C4965400390462 /* OptionalExtensions.swift */; };
+		8EE2DBC425C4990800390462 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2DBC325C4990800390462 /* CameraViewController.swift */; };
+		8EE2DBC925C49BAA00390462 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2DBC825C49BAA00390462 /* CameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		8E211FC525C283CE0037283D /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		8E211FCA25C3311B0037283D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EE2DBA925C3CCE600390462 /* CombineExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineExtensions.swift; sourceTree = "<group>"; };
+		8EE2DBB625C494FE00390462 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		8EE2DBBE25C4965400390462 /* OptionalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtensions.swift; sourceTree = "<group>"; };
+		8EE2DBC325C4990800390462 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		8EE2DBC825C49BAA00390462 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +114,12 @@
 				8E124EAC259EF16D00E37BAC /* CatDogClassifierApp.swift */,
 				8E124EAE259EF16D00E37BAC /* ContentView.swift */,
 				8E211FC525C283CE0037283D /* Classifier.swift */,
+				8EE2DBB625C494FE00390462 /* Camera.swift */,
+				8EE2DBC825C49BAA00390462 /* CameraView.swift */,
 				8E211FCA25C3311B0037283D /* AppDelegate.swift */,
 				8EE2DBA925C3CCE600390462 /* CombineExtensions.swift */,
+				8EE2DBBE25C4965400390462 /* OptionalExtensions.swift */,
+				8EE2DBC325C4990800390462 /* CameraViewController.swift */,
 				8E211FC025C280440037283D /* KaggleCatsDogsClassifier.mlmodel */,
 				8E124EB0259EF16F00E37BAC /* Assets.xcassets */,
 				8E124EB5259EF16F00E37BAC /* Info.plist */,
@@ -272,11 +284,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E211FC625C283CE0037283D /* Classifier.swift in Sources */,
+				8EE2DBBF25C4965400390462 /* OptionalExtensions.swift in Sources */,
 				8E124EAF259EF16D00E37BAC /* ContentView.swift in Sources */,
+				8EE2DBC925C49BAA00390462 /* CameraView.swift in Sources */,
+				8EE2DBB725C494FE00390462 /* Camera.swift in Sources */,
 				8E211FC125C280440037283D /* KaggleCatsDogsClassifier.mlmodel in Sources */,
 				8EE2DBAA25C3CCE600390462 /* CombineExtensions.swift in Sources */,
 				8E211FCB25C3311B0037283D /* AppDelegate.swift in Sources */,
 				8E124EAD259EF16D00E37BAC /* CatDogClassifierApp.swift in Sources */,
+				8EE2DBC425C4990800390462 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

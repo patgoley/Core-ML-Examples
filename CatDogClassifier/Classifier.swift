@@ -17,7 +17,7 @@ struct Classification {
 
 enum ClassificationError: Error {
     
-    case invalidImage
+    case invalidImage, modelError(Error)
 }
 
 struct Classifier {
@@ -54,12 +54,11 @@ struct Classifier {
         return Future { promise in
             
             let request = VNCoreMLRequest(model: model) { (req, error) in
-                
-                print("results: \(req), \(error)")
-                
+            
                 if let err = error {
                     
-                    fatalError("\(err)")
+                    promise(.failure(.modelError(err)))
+                    return
                 }
                 
                 let results = req.results as! [VNClassificationObservation]
@@ -75,7 +74,7 @@ struct Classifier {
                 
             } catch let err {
                 
-                fatalError("\(err)")
+                promise(.failure(.modelError(err)))
             }
         }
     }
