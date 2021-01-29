@@ -1,2 +1,5 @@
 venv
 CatDogClassifier.xcodeproj/xcuserdata
+turicreate/cats-dogs.model
+turicreate/PetImages
+turicreate/cats-dogs.sframe
