@@ -15,6 +15,21 @@ struct Classification {
     let confidence: Float
 }
 
+extension Classification: CustomStringConvertible {
+    
+    var description: String {
+        return "\(label): \(String(format: "%.3f", confidence))"
+    }
+}
+
+extension Classification: Comparable {
+    
+    static func < (lhs: Classification, rhs: Classification) -> Bool {
+        
+        lhs.confidence < rhs.confidence
+    }
+}
+
 enum ClassificationError: Error {
     
     case invalidImage, modelError(Error)
@@ -22,9 +37,10 @@ enum ClassificationError: Error {
 
 struct Classifier {
     
-    private static var model: VNCoreMLModel! = nil
+    private let model: VNCoreMLModel
+    private let queue: DispatchQueue = .global(qos: .userInteractive)
     
-    static func setup() throws {
+    init() throws {
         
         let config = MLModelConfiguration()
         config.computeUnits = .all
@@ -34,22 +50,30 @@ struct Classifier {
         )
     }
     
-    static func classify(_ image: UIImage) -> AnyPublisher<[Classification], ClassificationError> {
+    func classify(image: UIImage) -> AnyPublisher<[Classification], ClassificationError> {
         
         guard let ciImage = CIImage(image: image) else {
             return Future.fail(with: .invalidImage)
                 .eraseToAnyPublisher()
         }
         
-        return Future<CIImage, Never>.succeed(with: ciImage)
-            .receive(on: DispatchQueue.global(qos: .userInitiated))
+        return Future.succeed(with: ciImage)
+            .receive(on: queue)
             .flatMap { ciImage in
                 requestClassifications(image: ciImage, orientation: .init(imageOrientation:  image.imageOrientation))
             }
             .eraseToAnyPublisher()
     }
     
-    private static func requestClassifications(image: CIImage, orientation: CGImagePropertyOrientation) -> Future<[Classification], ClassificationError> {
+    func classify(sampleBuffer: CMSampleBuffer) -> AnyPublisher<[Classification], ClassificationError> {
+        
+        return Future.succeed(with: sampleBuffer)
+            .receive(on: queue)
+            .flatMap(requestClassifications(buffer:))
+            .eraseToAnyPublisher()
+    }
+    
+    private func requestClassifications(image: CIImage, orientation: CGImagePropertyOrientation) -> Future<[Classification], ClassificationError> {
         
         return Future { promise in
             
@@ -79,7 +103,37 @@ struct Classifier {
         }
     }
     
-    private init() { }
+    private func requestClassifications(buffer: CMSampleBuffer) -> Future<[Classification], ClassificationError> {
+        
+        return Future { promise in
+            
+            let request = VNCoreMLRequest(model: model) { (req, error) in
+            
+                if let err = error {
+                    
+                    promise(.failure(.modelError(err)))
+                    return
+                }
+                
+                let results = req.results as! [VNClassificationObservation]
+                
+                let labels = results.map { r in Classification(label: r.identifier, confidence: r.confidence) }
+                
+                promise(.success(labels))
+            }
+            
+            let handler = VNImageRequestHandler(cmSampleBuffer: buffer)
+            
+            do {
+                
+                try handler.perform([request])
+                
+            } catch let err {
+                
+                promise(.failure(.modelError(err)))
+            }
+        }
+    }
 }
 
 extension CGImagePropertyOrientation {

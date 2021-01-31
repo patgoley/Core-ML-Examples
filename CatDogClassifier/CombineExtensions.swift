@@ -14,8 +14,11 @@ extension Future {
             promise(.failure(error))
         }
     }
+}
+
+extension Future where Failure == Never {
     
-    static func succeed(with value: Output) -> Future<Output, Failure> {
+    static func succeed(with value: Output) -> Future<Output, Never> {
         return Future { (promise) in
             promise(.success(value))
         }

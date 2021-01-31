@@ -14,7 +14,10 @@ struct CatDogClassifierApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CameraView(camera: try! Camera())
+            ImageClassifierView(
+                camera: try! Camera(),
+                classifier: try! Classifier()
+            )
         }
     }
 }

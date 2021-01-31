@@ -7,16 +7,19 @@
 
 import Foundation
 import AVFoundation
+import Combine
 
 enum CameraError: Error {
     
-    case noDeviceFound
+    case noDeviceFound, setupFailed
 }
 
 final class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate  {
     
     let session: AVCaptureSession
     let queue = DispatchQueue.global(qos: .userInteractive)
+    
+    private let bufferSubject: PassthroughSubject<CMSampleBuffer, Never> = .init()
     
     init(session: AVCaptureSession = .init()) throws {
         
@@ -40,7 +43,28 @@ final class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate  {
         
         output.setSampleBufferDelegate(self, queue: queue)
         
+        if session.canAddOutput(output) {
+            
+            output.alwaysDiscardsLateVideoFrames = true
+            output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)]
+            
+            session.addOutput(output)
+        } else {
+            
+            throw CameraError.setupFailed
+        }
+        
         self.session.commitConfiguration()
+    }
+    
+    func getPreviewLayer() -> AVCaptureVideoPreviewLayer {
+        
+        return AVCaptureVideoPreviewLayer(session: session)
+    }
+    
+    func getBufferStream() -> AnyPublisher<CMSampleBuffer, Never> {
+        
+        return bufferSubject.eraseToAnyPublisher()
     }
     
     func startFeed() {
@@ -50,18 +74,6 @@ final class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate  {
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
-        let image = sampleBuffer.imageBuffer
-        
-        print("got image")
-    }
-}
-
-private class SampleBufferDelegateProxy: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
-    
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
-        let image = sampleBuffer.imageBuffer
-        
-        print("got image")
+        bufferSubject.send(sampleBuffer)
     }
 }

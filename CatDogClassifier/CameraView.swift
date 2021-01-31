@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct CameraView: UIViewControllerRepresentable {
+struct ImageClassifierView: UIViewControllerRepresentable {
     
     let camera: Camera
+    let classifier: Classifier
     
     func makeUIViewController(context: Context) -> some UIViewController {
         
-        return CameraViewController(camera: camera)
+        return ImageClassifierViewController(camera: camera, classifier: classifier)
     }
     
     
